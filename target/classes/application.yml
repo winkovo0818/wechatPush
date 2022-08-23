@@ -1,12 +1,12 @@
 server:
   port: 80
 wechat:
-  appId: ''
-  secret: ''
+  appId: 'wx4d83fc59935cb474'
+  secret: '633a7d4a69b127ec1e2939feee7ff824'
   district_id: '340100'
-  ak: ''
+  ak: 'z1u1thN9nHvRAROVQKerA69GNMKIS1PY'
   loveDate: '2021-08-23'
   birthday: '1998-08-23'
-  userId: ''
-  templateId: ''
-  rainbowKey: ''
+  userId: 'oOGB75s6MaNyUKIwnaAEIzOa3Lj4'
+  templateId: 'tf4mvYs_P5HYVvFHsVSTDb8gQnTKPt3-ZFSbLDgFogw'
+  rainbowKey: '38b02a29939373aed47131b3b74aef30'
