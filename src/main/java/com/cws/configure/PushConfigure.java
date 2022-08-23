@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * PushConfigure
  *
- * @author cws 18855165128
+ * @author cws
  * @date 2022/8/22 21:25
  */
 @Component

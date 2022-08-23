@@ -12,6 +12,8 @@ import java.net.URL;
 
 /**
  * 彩虹屁接口调用
+ *
+ * @author cws
  */
 public class RainbowUtil {
     public static String getRainbow() {
