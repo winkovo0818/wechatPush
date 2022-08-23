@@ -36,11 +36,12 @@ apiKey配置到application.yml的rainbowKey
 remark:需要在天行数据注册账号申请该接口
 
 
-结果展示(src/main/resources/img/1.png)
+结果展示![image](src/main/resources/img/1.png)
 
 
 4.如何运行
 启动项目后打开浏览器输入 localhost/test 即可手动调用
 定时任务默认每天早8点推送,如需修改可去Task类上修改cron表达式
+
 
 
