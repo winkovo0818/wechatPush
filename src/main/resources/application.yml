@@ -1,0 +1,12 @@
+server:
+  port: 80
+wechat:
+  appId: ''
+  secret: ''
+  district_id: '340100'
+  ak: ''
+  loveDate: '2021-08-23'
+  birthday: '1998-08-23'
+  userId: ''
+  templateId: ''
+  rainbowKey: ''
