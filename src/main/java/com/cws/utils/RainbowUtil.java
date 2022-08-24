@@ -46,9 +46,10 @@ public class RainbowUtil {
         if (jsonObject == null) {
             //接口地址有误或者接口没调通
             result.setCode("500");
-            result.setMessage("接口不通,请检查接口地址!");
+            result.setMessage("天行数据接口不通,请检查接口地址!");
             return result;
         }
+//            获取接口响应状态
         String code = jsonObject.getString("code");
         if (!"200".equals(code)) {
 //            如果响应状态不为200,则调用出错

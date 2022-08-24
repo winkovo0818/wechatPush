@@ -50,7 +50,7 @@ public class MemoryDayUtil {
     }
 
     /**
-     * 计算天数
+     * 计算距离纪念日的天数
      *
      * @param date
      * @return
@@ -67,7 +67,7 @@ public class MemoryDayUtil {
     }
 
     /**
-     * 计算生日
+     * 计算距离生日天数
      *
      * @param birthday
      * @return

@@ -34,7 +34,7 @@ public class WeatherUtil {
             result.setMessage("接口不通,请检查接口地址!");
             return result;
         }
-//        获取接口响应状态
+//            获取接口响应状态
         String status = json.getString("status");
         if (!"0".equals(status)) {
 //            响应状态不为0即调用出错
@@ -51,7 +51,7 @@ public class WeatherUtil {
         weather.setText_now(now.getString("text"));
         weather.setTemp(now.getString("temp"));
         weather.setCity(location.getString("city"));
-        result.setCode("0");
+        result.setCode(status);
         result.setData(weather);
         return result;
     }
