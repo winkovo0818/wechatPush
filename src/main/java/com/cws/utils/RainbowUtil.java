@@ -3,6 +3,7 @@ package com.cws.utils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.cws.configure.PushConfigure;
+import com.cws.pojo.Result;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -16,10 +17,10 @@ import java.net.URL;
  * @author cws
  */
 public class RainbowUtil {
-    public static String getRainbow() {
+    public static Result getRainbow() {
         String httpUrl = "http://api.tianapi.com/caihongpi/index?key=" + PushConfigure.getRainbowKey();
         BufferedReader reader = null;
-        String result = null;
+        String rs = null;
         StringBuilder stringBuilder = new StringBuilder();
 
         try {
@@ -35,16 +36,32 @@ public class RainbowUtil {
                 stringBuilder.append("\r\n");
             }
             reader.close();
-            result = stringBuilder.toString();
+            rs = stringBuilder.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        JSONObject jsonObject = JSONObject.parseObject(result);
+        JSONObject jsonObject = JSONObject.parseObject(rs);
+
+        Result result = new Result();
         if (jsonObject == null) {
-            return "";
+            //接口地址有误或者接口没调通
+            result.setCode("500");
+            result.setMessage("接口不通,请检查接口地址!");
+            return result;
+        }
+        String code = jsonObject.getString("code");
+        if (!"200".equals(code)) {
+//            如果响应状态不为200,则调用出错
+            String msg = jsonObject.getString("msg");
+            result.setCode(code);
+            result.setMessage("天行数据接口调用报错:" + msg);
+            return result;
         }
         JSONArray newslist = jsonObject.getJSONArray("newslist");
-        return "\n" + newslist.getJSONObject(0).getString("content");
+        String data = "\n" + newslist.getJSONObject(0).getString("content");
+        result.setCode(code);
+        result.setData(data);
+        return result;
     }
 
 }

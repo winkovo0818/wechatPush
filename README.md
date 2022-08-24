@@ -52,5 +52,26 @@ apiKey配置到application.yml的rainbowKey
 
 ###### `有问题欢迎留言或者私信`
 
+# 常见问题
 
 
+
+**1.推送失败：{"errcode":40003,"errmsg":"invalid openid rid: 630576d8-1139d71c-6d68a976"}**
+
+这个是由于userId填的不对
+
+ ![img](https://foruda.gitee.com/images/1661302607866807889/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png) 
+
+改成下面红框里的重启程序即可
+
+ ![å¡«è¿ä¸ª](https://foruda.gitee.com/images/1661302640325984367/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png) 
+
+
+
+# 代码优化
+
+关于大家遇到的空指针问题都做了优化处理
+
+现在异常情况会反馈到界面上,你们可以根据报错信息查找原因,而不是面对NullPointerException
+
+![1661309025827](src/main/resources/img/4.png)

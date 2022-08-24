@@ -1,12 +1,21 @@
 server:
   port: 80
 wechat:
+  #  微信公众平台的appID
   appId: ''
+  #  微信公众平台的appSecret
   secret: ''
+  #  天气查询的城市ID
   district_id: '340100'
+  #  应用AK
   ak: ''
+  #  纪念日
   loveDate: '2021-08-23'
+  #  生日
   birthday: '1998-08-23'
+  #  关注公众号的用户ID（要推送的人的用户ID,在微信公众平台里可以查看到）
   userId: ''
+  #  模板ID
   templateId: ''
+  #  天行数据apiKey
   rainbowKey: ''

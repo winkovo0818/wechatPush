@@ -1,6 +1,7 @@
 package com.cws.utils;
 
 import com.cws.configure.PushConfigure;
+import com.cws.pojo.Result;
 import com.cws.pojo.Weather;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -19,7 +20,7 @@ public class PushUtil {
      * 消息推送主要业务代码
      */
     public static String push() {
-        //1，配置
+        // 配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
         wxStorage.setAppId(PushConfigure.getAppId());
         wxStorage.setSecret(PushConfigure.getSecret());
@@ -30,13 +31,21 @@ public class PushUtil {
                 .toUser(PushConfigure.getUserId())
                 .templateId(PushConfigure.getTemplateId())
                 .build();
-        // 配置你的信息
+        // 计算天数
         long loveDays = MemoryDayUtil.calculationLianAi(PushConfigure.getLoveDate());
         long birthdays = MemoryDayUtil.calculationBirthday(PushConfigure.getBirthday());
-        Weather weather = WeatherUtil.getWeather();
-        if (weather == null) {
+        templateMessage.addData(new WxMpTemplateData("loveDays", loveDays + "", "#FF1493"));
+        templateMessage.addData(new WxMpTemplateData("birthdays", birthdays + "", "#FFA500"));
+
+        // 获取天气数据
+        Result weatherResult = WeatherUtil.getWeather();
+        StringBuilder messageAll = new StringBuilder();
+        if (!"0".equals(weatherResult.getCode())) {
+            messageAll.append("<br/>");
+            messageAll.append(weatherResult.getMessage());
             templateMessage.addData(new WxMpTemplateData("weather", "***", "#00FFFF"));
         } else {
+            Weather weather = (Weather) weatherResult.getData();
             templateMessage.addData(new WxMpTemplateData("date", weather.getDate() + "  " + weather.getWeek(), "#00BFFF"));
             templateMessage.addData(new WxMpTemplateData("weather", weather.getText_now(), "#00FFFF"));
             templateMessage.addData(new WxMpTemplateData("low", weather.getLow() + "", "#173177"));
@@ -45,9 +54,15 @@ public class PushUtil {
             templateMessage.addData(new WxMpTemplateData("city", weather.getCity() + "", "#173177"));
         }
 
-        templateMessage.addData(new WxMpTemplateData("loveDays", loveDays + "", "#FF1493"));
-        templateMessage.addData(new WxMpTemplateData("birthdays", birthdays + "", "#FFA500"));
-
+        // 天行数据接口
+        Result rainbowResult = RainbowUtil.getRainbow();
+        if (!"200".equals(rainbowResult.getCode())) {
+            messageAll.append("<br/>");
+            messageAll.append(rainbowResult.getMessage());
+        } else {
+            templateMessage.addData(new WxMpTemplateData("rainbow", (String) rainbowResult.getData(), "#FF69B4"));
+        }
+        // 备注
         String remark = "❤";
         if (loveDays % 365 == 0) {
             remark = "\n今天是恋爱" + (loveDays / 365) + "周年纪念日!";
@@ -58,9 +73,9 @@ public class PushUtil {
         if (loveDays % 365 == 0 && birthdays == 0) {
             remark = "\n今天是生日,也是恋爱" + (loveDays / 365) + "周年纪念日!";
         }
-
         templateMessage.addData(new WxMpTemplateData("remark", remark, "#FF1493"));
-        templateMessage.addData(new WxMpTemplateData("rainbow", RainbowUtil.getRainbow(), "#FF69B4"));
+
+
         System.out.println(templateMessage.toJson());
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
@@ -68,6 +83,6 @@ public class PushUtil {
             System.out.println("推送失败：" + e.getMessage());
             return "推送失败：" + e.getMessage();
         }
-        return "推送成功!";
+        return "推送成功!" + messageAll;
     }
 }
