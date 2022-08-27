@@ -33,10 +33,9 @@ https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login <br/>
 
 ### **2.打开百度地图开放平台:**
 
-**地址：https://lbsyun.baidu.com/apiconsole/center#/home**
-**天气服务接口文档:**
-**https://lbs.baidu.com/index.php?title=webapi/weather**
-**创建应用:选择服务端，ip地址不知道怎么填就填   0.0.0.0/0 不要泄露自己的AK就行**
+**地址：https://lbsyun.baidu.com/apiconsole/center#/home** <br/>
+**天气服务接口文档:** **https://lbs.baidu.com/index.php?title=webapi/weather**  <br/>
+**创建应用:选择服务端，ip地址不知道怎么填就填   0.0.0.0/0 不要泄露自己的AK就行**  <br/>
 **https://lbsyun.baidu.com/apiconsole/key#/home**
 
 应用AK配置到application.yml的ak。<br/>
@@ -95,24 +94,18 @@ apiKey配置到application.yml的rainbowKey
 
 ![1661309025827](src/main/resources/img/5.png)
 ![1661309025827](src/main/resources/img/6.png)
+**注意**：
+
+模版消息本身是不支持群发的。这些通知的对象都是单个人，而非群体，所以微信接口并没有允许一次传递多个openid。
+代码实现的发送给多个人，本质上是多次调接口（填写几个userId就会调用几次微信发送消息的接口,天气接口和天行数据接口不会重复调用,不会消耗调用次数）。
+一天最多推送100000条。
+具体可查看 [https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277](https://gitee.com/link?target=https%3A%2F%2Fmp.weixin.qq.com%2Fwiki%3Ft%3Dresource%2Fres_main%26id%3Dmp1433751277)
 
 ### 3.新增农历生日计算,可在配置界面选择你的生日计算方式。
 
 如果当天是二十四节气或者重大节日（国庆中秋等）也会显示出来。
 
-
-
-
-**注意**： 
-
-模版消息本身是不支持群发的。这些通知的对象都是单个人，而非群体，所以微信接口并没有允许一次传递多个openid。
-代码实现的发送给多个人，本质上是多次调接口（填写几个userId就会调用几次微信发送消息的接口,天气接口和天行数据接口不会重复调用,不会消耗调用次数）。
-一天最多推送100000条。
-具体可查看 [https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277](https://gitee.com/link?target=https%3A%2F%2Fmp.weixin.qq.com%2Fwiki%3Ft%3Dresource%2Fres_main%26id%3Dmp1433751277) 
-
 ## 如果我的代码对你有帮助,欢迎给我一个Star
-
-
 
 #### 本项目根据博客教程开发而来，码云上有人用我代码只改一下readme文件就上传到自己仓库也不标明原作者，希望大家都能支持原创吧！！！
 
