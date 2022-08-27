@@ -9,13 +9,15 @@ wechat:
   district_id: '340100'
   #  应用AK
   ak: ''
-  #  纪念日：注意格式 yyyy-MM-dd
+  #  纪念日：注意格式yyyy-MM-dd
   loveDate: '2021-08-23'
-  #  生日：注意格式 yyyy-MM-dd
+  #  生日：注意格式yyyy-MM-dd
   birthday: '1998-08-23'
-  #  关注公众号的用户ID（要推送的人的用户ID,在微信公众平台里可以查看到）
-  userId: ''
   #  模板ID
   templateId: ''
   #  天行数据apiKey
   rainbowKey: ''
+  #  关注公众号的用户ID（要推送的人的用户ID,在微信公众平台里可以查看到,现在支持推送多个人）
+  userId:
+    - ''
+    - ''

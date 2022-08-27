@@ -3,8 +3,10 @@ package com.cws.utils;
 import com.cws.configure.PushConfigure;
 import com.cws.pojo.Result;
 import com.cws.pojo.Weather;
+import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.WxMpTemplateMsgService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
@@ -16,19 +18,15 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
  * @date 2022/8/22 21:40
  */
 public class PushUtil {
+
+    private static WxMpTemplateMsgService wxService = null;
+
     /**
      * 消息推送主要业务代码
      */
     public static String push() {
-        // 配置
-        WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
-        wxStorage.setAppId(PushConfigure.getAppId());
-        wxStorage.setSecret(PushConfigure.getSecret());
-        WxMpService wxMpService = new WxMpServiceImpl();
-        wxMpService.setWxMpConfigStorage(wxStorage);
-        // 推送消息
+        // 构建模板消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser(PushConfigure.getUserId())
                 .templateId(PushConfigure.getTemplateId())
                 .build();
         // 计算天数
@@ -77,12 +75,45 @@ public class PushUtil {
 
 
         System.out.println(templateMessage.toJson());
-        try {
-            wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
-        } catch (Exception e) {
-            System.out.println("推送失败：" + e.getMessage());
-            return "推送失败：" + e.getMessage();
+
+        // 拿到service
+        WxMpTemplateMsgService service = getService();
+
+        int suc = 0;
+        int err = 0;
+        for (String userId : PushConfigure.getUserId()) {
+            templateMessage.setToUser(userId);
+            try {
+                service.sendTemplateMsg(templateMessage);
+                suc += 1;
+            } catch (WxErrorException e) {
+                err += 1;
+                messageAll.append(suc).append("个成功!");
+                messageAll.append(err).append("个失败!");
+                messageAll.append("<br/>");
+                messageAll.append(e.getMessage());
+                return "推送结果:" + messageAll;
+            }
         }
-        return "推送成功!" + messageAll;
+
+        return "成功推送给" + suc + "个用户!" + messageAll;
+    }
+
+    /**
+     * 获取 WxMpTemplateMsgService
+     *
+     * @return WxMpTemplateMsgService
+     */
+    private static WxMpTemplateMsgService getService() {
+        if (wxService != null) {
+            return wxService;
+        }
+        WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
+        wxStorage.setAppId(PushConfigure.getAppId());
+        wxStorage.setSecret(PushConfigure.getSecret());
+        WxMpService wxMpService = new WxMpServiceImpl();
+        wxMpService.setWxMpConfigStorage(wxStorage);
+        wxService = wxMpService.getTemplateMsgService();
+        return wxService;
     }
 }

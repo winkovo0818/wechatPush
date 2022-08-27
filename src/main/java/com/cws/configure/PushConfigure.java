@@ -3,6 +3,8 @@ package com.cws.configure;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * PushConfigure
  *
@@ -39,7 +41,7 @@ public class PushConfigure {
     /**
      * 关注公众号的用户ID
      */
-    private static String userId;
+    private static List<String> userId;
     /**
      * 模板ID
      */
@@ -98,11 +100,11 @@ public class PushConfigure {
         PushConfigure.birthday = birthday;
     }
 
-    public static String getUserId() {
+    public static List<String> getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(List<String> userId) {
         PushConfigure.userId = userId;
     }
 
