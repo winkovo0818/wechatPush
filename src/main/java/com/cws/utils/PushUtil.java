@@ -1,5 +1,6 @@
 package com.cws.utils;
 
+import com.cws.DateUtils.LunarCalendarFestivalUtils;
 import com.cws.configure.PushConfigure;
 import com.cws.pojo.Result;
 import com.cws.pojo.Weather;
@@ -31,7 +32,13 @@ public class PushUtil {
                 .build();
         // 计算天数
         long loveDays = MemoryDayUtil.calculationLianAi(PushConfigure.getLoveDate());
-        long birthdays = MemoryDayUtil.calculationBirthday(PushConfigure.getBirthday());
+        long birthdays = 0;
+        if (PushConfigure.isUseLunar()) {
+            // 如果使用农历生日
+            birthdays = MemoryDayUtil.calculationBirthdayByLunar(PushConfigure.getBirthday());
+        } else {
+            birthdays = MemoryDayUtil.calculationBirthday(PushConfigure.getBirthday());
+        }
         templateMessage.addData(new WxMpTemplateData("loveDays", loveDays + "", "#FF1493"));
         templateMessage.addData(new WxMpTemplateData("birthdays", birthdays + "", "#FFA500"));
 
@@ -44,10 +51,18 @@ public class PushUtil {
             templateMessage.addData(new WxMpTemplateData("weather", "***", "#00FFFF"));
         } else {
             Weather weather = (Weather) weatherResult.getData();
+            // 拿到农历日期
+            LunarCalendarFestivalUtils festival = new LunarCalendarFestivalUtils();
+            festival.initLunarCalendarInfo(weather.getDate());
+
             templateMessage.addData(new WxMpTemplateData("date", weather.getDate() + "  " + weather.getWeek(), "#00BFFF"));
+            templateMessage.addData(new WxMpTemplateData("lunar", "农历" + festival.getLunarYear() + "年 " + festival.getLunarMonth() + "月" + festival.getLunarDay(), "#00BFFF"));
+            templateMessage.addData(new WxMpTemplateData("festival", festival.getLunarTerm() + " " + festival.getSolarFestival() + " " + festival.getLunarFestival(), "#00BFFF"));
             templateMessage.addData(new WxMpTemplateData("weather", weather.getText_now(), "#00FFFF"));
             templateMessage.addData(new WxMpTemplateData("low", weather.getLow() + "", "#173177"));
             templateMessage.addData(new WxMpTemplateData("temp", weather.getTemp() + "", "#EE212D"));
+            templateMessage.addData(new WxMpTemplateData("wc_day", weather.getWc_day() + "", "#EE212D"));
+            templateMessage.addData(new WxMpTemplateData("wd_day", weather.getWd_day() + "", "#EE212D"));
             templateMessage.addData(new WxMpTemplateData("high", weather.getHigh() + "", "#FF6347"));
             templateMessage.addData(new WxMpTemplateData("city", weather.getCity() + "", "#173177"));
         }

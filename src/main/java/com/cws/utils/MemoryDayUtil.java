@@ -1,6 +1,10 @@
 package com.cws.utils;
 
 
+import com.cws.DateUtils.Lunar;
+import com.cws.DateUtils.LunarSolarConverter;
+import com.cws.DateUtils.Solar;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -67,30 +71,57 @@ public class MemoryDayUtil {
     }
 
     /**
-     * 计算距离生日天数
+     * 计算距离生日天数（阳历）
      *
-     * @param birthday
+     * @param birthday 阳历生日
      * @return
      */
     public static long calculationBirthday(String birthday) {
         SimpleDateFormat simpleDateFormat = get();
         Calendar cToday = Calendar.getInstance();
         Calendar cBirth = Calendar.getInstance();
-        Date now = new Date();
+        Date birth = new Date();
         try {
-            now = simpleDateFormat.parse(birthday);
+            birth = simpleDateFormat.parse(birthday);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        cBirth.setTime(now);
+        cBirth.setTime(birth);
         cBirth.set(Calendar.YEAR, cToday.get(Calendar.YEAR));
         int days;
         if (cBirth.get(Calendar.DAY_OF_YEAR) < cToday.get(Calendar.DAY_OF_YEAR)) {
+            //如果今年的生日已经过了
+            //计算距离过完今年还有多少天
             days = cToday.getActualMaximum(Calendar.DAY_OF_YEAR) - cToday.get(Calendar.DAY_OF_YEAR);
+            //加上明天生日是在明天的第多少天
             days += cBirth.get(Calendar.DAY_OF_YEAR);
         } else {
             days = cBirth.get(Calendar.DAY_OF_YEAR) - cToday.get(Calendar.DAY_OF_YEAR);
         }
         return days;
+    }
+
+    /**
+     * 计算距离生日天数（阴历）
+     *
+     * @param birthday 阳历生日  注意:虽然这里计算的是阴历生日,但参数仍然是阳历的生日
+     * @return
+     */
+    public static long calculationBirthdayByLunar(String birthday) {
+        Solar solar = new Solar();
+        solar.parseDate(birthday);
+        // 转农历
+        Lunar lunar = LunarSolarConverter.SolarToLunar(solar);
+        System.out.println("出生那年的阴历日期:" + lunar);
+        // 获取今年生日阳历日期
+        lunar.setLunarYear(Calendar.getInstance().getWeekYear());
+        solar = LunarSolarConverter.LunarToSolar(lunar);
+        System.out.println("今年生日的阳历日期:" + solar);
+        return calculationBirthday(solar.getStringDate());
+    }
+
+    public static void main(String[] args) {
+        System.out.println("阴历生日还有:" + calculationBirthdayByLunar("1998-01-06") + "天");
+        System.out.println("阳历生日还有:" + calculationBirthday("1998-01-06") + "天");
     }
 }

@@ -2,22 +2,24 @@ server:
   port: 80
 wechat:
   #  微信公众平台的appID
-  appId: ''
+  appId: 'wx4d83fc59935cb474'
   #  微信公众平台的appSecret
-  secret: ''
+  secret: '633a7d4a69b127ec1e2939feee7ff824'
   #  百度地图开放平台的城市ID
   district_id: '340100'
   #  百度地图开放平台的应用AK
-  ak: ''
+  ak: 'z1u1thN9nHvRAROVQKerA69GNMKIS1PY'
   #  纪念日：注意格式yyyy-MM-dd
   loveDate: '2021-08-23'
-  #  生日：注意格式yyyy-MM-dd
-  birthday: '1998-08-23'
+  #  生日：注意格式yyyy-MM-dd （无论是计算阳历生日还是农历生日,一律填阳历出生年月日）
+  birthday: '1998-01-06'
   #  模板ID
-  templateId: ''
+  templateId: 'ZB3wETu7srAfVHBmRIrGSoAjQ1qhICsyKD7ciIXoud8'
   #  天行数据apiKey
-  rainbowKey: ''
+  rainbowKey: '38b02a29939373aed47131b3b74aef30'
   #  关注公众号的用户ID（要推送的人的用户ID,在微信公众平台里可以查看到,现在支持推送多个人）
   userId:
-    - ''
-    - ''
+    - 'oOGB75s6MaNyUKIwnaAEIzOa3Lj4'
+    - 'oOGB75s6MaNyUKIwnaAEIzOa3Lj4'
+  #    是否按农历计算生日 true:是 false:否
+  useLunar: true

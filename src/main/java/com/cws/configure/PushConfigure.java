@@ -52,6 +52,11 @@ public class PushConfigure {
      */
     private static String rainbowKey;
 
+    /**
+     * 是否使用农历计算生日
+     */
+    private static boolean useLunar;
+
     public static String getAppId() {
         return appId;
     }
@@ -122,5 +127,13 @@ public class PushConfigure {
 
     public void setRainbowKey(String rainbowKey) {
         PushConfigure.rainbowKey = rainbowKey;
+    }
+
+    public static boolean isUseLunar() {
+        return useLunar;
+    }
+
+    public void setUseLunar(boolean useLunar) {
+        PushConfigure.useLunar = useLunar;
     }
 }
