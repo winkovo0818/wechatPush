@@ -93,8 +93,8 @@ apiKey配置到application.yml的rainbowKey
 
 **注意**： 
 
-模版消息本身是不支持群发的。这些通知的对象都是单个人，而非群体，所以微信接口并没有允许一次传递多个openid。
-代码实现的发送给多个人，本质上是多次调接口（填写几个userId就会调用几次微信发送消息的接口,天气接口和天行数据接口不会重复调用,不会消耗调用次数） ，但是这样做可能会违反《模板消息运营规范》，有被封号的危险。
+模版消息本身是不支持群发的。这些通知的对象都是单个人，而非群体，所以微信接口并没有允许一次传递多个userId。
+代码实现的发送给多个人，本质上是多次调接口（填写几个userId就会调用几次微信发送消息的接口,天气接口和天行数据接口不会重复调用,不会消耗调用次数)。
 一天最多推送100000条。
 具体可查看 [https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277](https://gitee.com/link?target=https%3A%2F%2Fmp.weixin.qq.com%2Fwiki%3Ft%3Dresource%2Fres_main%26id%3Dmp1433751277) 
 
