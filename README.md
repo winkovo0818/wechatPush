@@ -8,7 +8,7 @@
 
 ### **1.注册微信测试账号，编辑模板**
 
-https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
+https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login <br/>
 把appId、secret都配置到application.yml。
 扫码关注得到用户的id,配置到application.yml的userId。
 
@@ -31,19 +31,17 @@ https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
 
 模板ID配置到application.yml的templateId
 
-### **2.百度地图开放平台:**
+### **2.打开百度地图开放平台:**
 
-**https://lbsyun.baidu.com/apiconsole/center#/home**
+**地址：https://lbsyun.baidu.com/apiconsole/center#/home**
 **天气服务接口文档:**
 **https://lbs.baidu.com/index.php?title=webapi/weather**
-**创建应用:选择服务端**
+**创建应用:选择服务端，ip地址不知道怎么填就填   0.0.0.0/0 不要泄露自己的AK就行**
 **https://lbsyun.baidu.com/apiconsole/key#/home**
 
-ip地址不知道怎么填就填   0.0.0.0/0 不要泄露自己的AK就行
-
-应用AK配置到application.yml的ak。
-要查询的城市ID配置到application.yml的district_id。
-备注:城市对应ID可在https://lbs.baidu.com/index.php?title=webapi/weather 的服务文档的请求参数的district_id一栏下载 行政区划编码 查看
+应用AK配置到application.yml的ak。<br/>
+要查询的城市ID配置到application.yml的district_id。<br/>
+备注:城市对应ID可在https://lbs.baidu.com/index.php?title=webapi/weather 的服务文档的请求参数的district_id一栏下载 “**行政区划编码**” 查看 <br/>
 
 ### **3.彩虹屁平台**
 
@@ -69,7 +67,7 @@ apiKey配置到application.yml的rainbowKey
 
 
 
-**1.推送失败：{"errcode":40003,"errmsg":"invalid openid rid: 630576d8-1139d71c-6d68a976"}**
+### **1.推送失败：{"errcode":40003,"errmsg":"invalid openid rid: 630576d8-1139d71c-6d68a976"}**
 
 这个是由于userId填的不对,userId是微信公众号上扫码关注后生成的一串字符串,不是关注人的微信号。
 
@@ -79,8 +77,9 @@ apiKey配置到application.yml的rainbowKey
 
  ![1661309025827](src/main/resources/img/8.png)
 
-**2.推送失败：{"errcode":40125,"errmsg":"invalid appsecret rid: 6305aafd-5a6dbc88-1da22e34"}**
-这是微信的appsecret没填对
+### **2.推送失败：{"errcode":40125,"errmsg":"invalid appsecret rid: 6305aafd-5a6dbc88-1da22e34"}**
+
+​    这是由于微信的appsecret没填对
 
 ## 代码优化
 
