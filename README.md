@@ -15,13 +15,13 @@ https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
 编辑模板:
 
 ```
-​```
 {{date.DATA}} {{remark.DATA}}
 {{city.DATA}}的天气：{{weather.DATA}}
 最低气温：{{low.DATA}}度
 最高气温：{{high.DATA}}度
 今天是我们恋爱的第{{loveDays.DATA}}天
-距离宝宝的生日还有{{birthdays.DATA}}天{{rainbow.DATA}}
+距离宝宝的生日还有{{birthdays.DATA}}天
+{{rainbow.DATA}}
 ```
 
 
@@ -65,20 +65,20 @@ apiKey配置到application.yml的rainbowKey
 
 **1.推送失败：{"errcode":40003,"errmsg":"invalid openid rid: 630576d8-1139d71c-6d68a976"}**
 
-这个是由于userId填的不对
+这个是由于userId填的不对,userId是微信公众号上扫码关注后生成的一串字符串,不是关注人的微信号。
 
 ![1661309025827](src/main/resources/img/7.png) 
 
 改成下面红框里的重启程序即可
 
- ![å¡«è¿ä¸ª](https://foruda.gitee.com/images/1661302640325984367/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png) 
+ ![1661309025827](src/main/resources/img/8.png)
 
-**2.推送失败：{"errcode":40003,"errmsg":"invalid openid rid: 630971f8-2af5e13f-50ad2ca1"}**
-这是userId填错了,userId是微信公众号上扫码关注后生成的一串字符串,不是关注人的微信号。
+**2.推送失败：{"errcode":40125,"errmsg":"invalid appsecret rid: 6305aafd-5a6dbc88-1da22e34"}**
+这是微信的appsecret没填对
 
 # 代码优化
 
-1.关于大家遇到的空指针问题都做了优化处理
+1.关于大家遇到的空指针问题都做了优化处理。
 
 现在异常情况会反馈到界面上,你们可以根据报错信息查找原因,而不是面对NullPointerException
 
@@ -86,7 +86,16 @@ apiKey配置到application.yml的rainbowKey
 
 2.为了满足你们的需求,增加了推送给多个关注用户的功能,在userId配置多个即可。
 
+**手动调用结果展示：**
+
 ![1661309025827](src/main/resources/img/5.png)
 ![1661309025827](src/main/resources/img/6.png)
+
+**注意**： 
+
+模版消息本身是不支持群发的。这些通知的对象都是单个人，而非群体，所以微信接口并没有允许一次传递多个openid。
+代码实现的发送给多个人，本质上是多次调接口（填写几个userId就会调用几次微信发送消息的接口,天气接口和天行数据接口不会重复调用,不会消耗调用次数） ，但是这样做可能会违反《模板消息运营规范》，有被封号的危险。
+一天最多推送100000条。
+具体可查看 [https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433751277](https://gitee.com/link?target=https%3A%2F%2Fmp.weixin.qq.com%2Fwiki%3Ft%3Dresource%2Fres_main%26id%3Dmp1433751277) 
 
 #### 如果我的代码对你有帮助，欢迎给我一个Star
