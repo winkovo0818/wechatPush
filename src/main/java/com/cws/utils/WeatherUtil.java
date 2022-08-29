@@ -51,6 +51,7 @@ public class WeatherUtil {
         weather.setText_now(now.getString("text"));
         weather.setTemp(now.getString("temp"));
         weather.setCity(location.getString("city"));
+        weather.setCityName(location.getString("name"));
         result.setCode(status);
         result.setData(weather);
         return result;

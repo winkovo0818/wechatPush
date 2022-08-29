@@ -30,4 +30,6 @@ public class Weather {
     private String temp;
     // 当前城市
     private String city;
+    // 具体城市(到县级)
+    private String cityName;
 }

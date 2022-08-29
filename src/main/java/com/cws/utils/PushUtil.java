@@ -64,7 +64,7 @@ public class PushUtil {
             templateMessage.addData(new WxMpTemplateData("wc_day", weather.getWc_day() + "", "#EE212D"));
             templateMessage.addData(new WxMpTemplateData("wd_day", weather.getWd_day() + "", "#EE212D"));
             templateMessage.addData(new WxMpTemplateData("high", weather.getHigh() + "", "#FF6347"));
-            templateMessage.addData(new WxMpTemplateData("city", weather.getCity() + "", "#173177"));
+            templateMessage.addData(new WxMpTemplateData("city", weather.getCityName() + "", "#173177"));
         }
 
         // 天行数据接口

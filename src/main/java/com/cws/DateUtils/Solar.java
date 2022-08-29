@@ -39,5 +39,10 @@ public class Solar {
         this.solarMonth = Integer.parseInt(split[1]);
         this.solarDay = Integer.parseInt(split[2]);
     }
+
+    @Override
+    public String toString() {
+        return solarYear + "年" + solarMonth + "月" + solarDay + "日";
+    }
 }
 

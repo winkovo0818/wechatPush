@@ -11,4 +11,9 @@ public class Lunar {
     public int lunarMonth;
     public int lunarDay;
     public boolean isLeap;
+
+    @Override
+    public String toString() {
+        return lunarYear + "年" + lunarMonth + "月初" + lunarDay;
+    }
 }
