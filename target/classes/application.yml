@@ -6,7 +6,7 @@ wechat:
   #  微信公众平台的appSecret
   secret: ''
   #  百度地图开放平台的城市ID
-  district_id: ''
+  district_id: '340100'
   #  百度地图开放平台的应用AK
   ak: ''
   #  纪念日：注意格式yyyy-MM-dd

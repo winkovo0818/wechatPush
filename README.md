@@ -28,7 +28,7 @@ https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login <br/>
 {{rainbow.DATA}}
 ```
 
-
+![image](src/main/resources/img/10.png)
 模板ID配置到application.yml的templateId
 
 ### **2.打开百度地图开放平台:**
@@ -110,3 +110,46 @@ apiKey配置到application.yml的rainbowKey
 #### 本项目根据博客教程开发而来，码云上有人用我代码只改一下readme文件就上传到自己仓库也不标明原作者，希望大家都能支持原创吧！！！
 
 #### respect!!!
+
+# 关于运行
+
+## 1.下载下来等依赖下载完，配置好参数，运行启动类即可。
+
+最近有很多朋友问我怎么运行，这个项目就是一个springboot项目，直接运行启动类就运行起来了。
+
+因为有很多不会springboot的兄弟，所以我再提一下。首先项目下载到本地，无论是通过git还是zip。
+
+直接在idea打开就行了，通过maven下载项目所需依赖。
+
+## 2.如果没有maven
+
+### 1.先下载maven。
+
+### 2.配置maven系统环境变量。
+
+### 3.在maven的setting.xml里修改本地仓库路径和添加阿里云仓库镜像。
+
+```xml
+<localRepository>F:\pandownload\maven_repository</localRepository>
+```
+
+```xml
+<mirror>  
+    <id>aliyunmaven</id>   
+    <mirrorOf>*</mirrorOf>  
+    <name>阿里云公共仓库</name>    
+    <url>https://maven.aliyun.com/repository/public</url>
+</mirror>
+```
+
+### 4.在idea配置maven安装路径。
+
+![image](src/main/resources/img/11.png)
+
+### 5.利用idea自动下载项目所需依赖。
+
+![image](src/main/resources/img/12.png)
+
+第一次下载依赖会比较慢，因为你的仓库很多依赖都没有，大概需要几分钟到10分钟，下载完没有爆红就可以启动项目了
+
+![image](src/main/resources/img/13.png)
