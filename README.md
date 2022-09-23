@@ -56,9 +56,7 @@ apiKey配置到application.yml的rainbowKey
 ![image](src/main/resources/img/2.png)
 
 启动项目后打开浏览器输入  localhost/test  即可手动调用。
-定时任务默认每天早8点推送,如需修改可去Task类上修改cron表达式。
-
-![image](src/main/resources/img/3.png)
+定时任务默认每天早8点推送,如需修改可去application.yml上修改cron表达式。(不会写cron表达式的可以百度搜索：在线cron表达式)
 
 ###### `有问题欢迎留言或者私信`
 
@@ -72,7 +70,9 @@ apiKey配置到application.yml的rainbowKey
 
 ![1661309025827](src/main/resources/img/7.png) 
 
-改成下面红框里的重启程序即可
+改成下面红框里的重启程序即可。
+
+如果只推送一个人，就把空白的userId注释掉，否则也会报这个错。
 
  ![1661309025827](src/main/resources/img/8.png)
 
@@ -107,7 +107,7 @@ apiKey配置到application.yml的rainbowKey
 
 ## 如果我的代码对你有帮助,欢迎给我一个Star
 
-#### 本项目根据博客教程开发而来，码云上有人用我代码只改一下readme文件就上传到自己仓库也不标明原作者，希望大家都能支持原创吧！！！
+## 转载上传请标明原仓库谢谢!!!
 
 #### respect!!!
 
@@ -124,6 +124,8 @@ apiKey配置到application.yml的rainbowKey
 ## 2.如果没有maven
 
 ### 1.先下载maven。
+
+建议下载和我一样的版本（3.5.2），因为好多朋友下载的3.8的高版本idea不支持。
 
 ### 2.配置maven系统环境变量。
 
@@ -153,3 +155,7 @@ apiKey配置到application.yml的rainbowKey
 第一次下载依赖会比较慢，因为你的仓库很多依赖都没有，大概需要几分钟到10分钟，下载完没有爆红就可以启动项目了
 
 ![image](src/main/resources/img/13.png)
+
+# 关于部署
+
+如果没有服务器的朋友可以把该项目注册成windows服务并开机自启，这样只要你的电脑是开机状态程序就会一直运行。这种方式对你日常使用电脑几乎没有任何影响（只是多占了一点内存）。
