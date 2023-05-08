@@ -159,3 +159,36 @@ apiKey配置到application.yml的rainbowKey
 # 关于部署
 
 如果没有服务器的朋友可以把该项目注册成windows服务并开机自启，这样只要你的电脑是开机状态程序就会一直运行。这种方式对你日常使用电脑几乎没有任何影响（只是多占了一点内存）。
+
+## 2023年5月8日
+最近收到网友反馈消息发送数据不全,最后发现是微信对模板消息做了约束
+![img.png](src/main/resources/img/14.png)
+
+具体查看
+[关于规范公众号模板消息的再次公告。](https://mp.weixin.qq.com/s?__biz=Mzg4NDYwOTcyNA==&mid=2247509160&idx=1&sn=d65ca01350c4e0aa5c2000a6388994fa&chksm=cfb7637bf8c0ea6d2c123321e88a586e8d03e01d976b6e79e7fb0480a6a6fe99be926de68e3b&token=352752870&lang=zh_CN#rd)
+
+由于微信对模板消息加了字数限制和对换行符的屏蔽以及对字体颜色的消除,所以我把模板调整了下
+,彩虹屁会有显示不全的可能,最多20字。
+新的模板：
+
+```
+今天是{{date.DATA}}
+农历{{lunar.DATA}}{{festival.DATA}}{{remark.DATA}}
+所在位置:{{city.DATA}}
+天气:{{weather.DATA}}
+最低气温: {{low.DATA}}度
+最高气温: {{high.DATA}}度
+风力: {{wc_day.DATA}}
+风向: {{wd_day.DATA}}
+今天是我们恋爱的第{{loveDays.DATA}}天
+距离宝宝的生日还有{{birthdays.DATA}}天
+想对你说:{{rainbow.DATA}}
+```
+
+复制过去如果有显示不全,记得去除换行符
+
+###对于模板的调整:
+需要自定义模板时需要记住,变量前面需要加文字,不加的话会被系统以为是首行内容或尾部备注,下发的时候就被去除,就没有内容了。
+![img.png](src/main/resources/img/15.png)
+
+没有字体颜色感觉low了好多,这个我也木有办法了

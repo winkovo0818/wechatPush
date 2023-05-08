@@ -56,7 +56,7 @@ public class PushUtil {
             festival.initLunarCalendarInfo(weather.getDate());
 
             templateMessage.addData(new WxMpTemplateData("date", weather.getDate() + "  " + weather.getWeek(), "#00BFFF"));
-            templateMessage.addData(new WxMpTemplateData("lunar", "农历" + festival.getLunarYear() + "年 " + festival.getLunarMonth() + "月" + festival.getLunarDay(), "#00BFFF"));
+            templateMessage.addData(new WxMpTemplateData("lunar", festival.getLunarYear() + "年 " + festival.getLunarMonth() + "月" + festival.getLunarDay(), "#00BFFF"));
             templateMessage.addData(new WxMpTemplateData("festival", festival.getLunarTerm() + " " + festival.getSolarFestival() + " " + festival.getLunarFestival(), "#00BFFF"));
             templateMessage.addData(new WxMpTemplateData("weather", weather.getText_now(), "#00FFFF"));
             templateMessage.addData(new WxMpTemplateData("low", weather.getLow() + "", "#173177"));
@@ -73,7 +73,9 @@ public class PushUtil {
             messageAll.append("<br/>");
             messageAll.append(rainbowResult.getMessage());
         } else {
-            templateMessage.addData(new WxMpTemplateData("rainbow", (String) rainbowResult.getData(), "#FF69B4"));
+            String data = (String) rainbowResult.getData();
+            data = data.replaceAll("\r|\n", "");
+            templateMessage.addData(new WxMpTemplateData("rainbow", data, "#FF69B4"));
         }
         // 备注
         String remark = "❤";

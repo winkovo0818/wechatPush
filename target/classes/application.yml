@@ -21,7 +21,7 @@ wechat:
   userId:
     - ''
     - ''
-  #    是否按农历计算生日 true:是 false:否
+  #  是否按农历计算生日 true:是 false:否
   useLunar: true
   #  cron表达式
   cron: 0 0 8 * * ?
