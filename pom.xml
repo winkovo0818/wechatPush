@@ -8,10 +8,10 @@
         <version>2.7.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.cws</groupId>
+    <groupId>com.winkovo</groupId>
     <artifactId>wechat</artifactId>
     <version>0.0.1</version>
-    <name>cws</name>
+    <name>YunCloud</name>
     <description>微信公众号推送</description>
     <properties>
         <java.version>1.8</java.version>
@@ -71,6 +71,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                    <mainClass>com.winkovo.WechatPushApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
