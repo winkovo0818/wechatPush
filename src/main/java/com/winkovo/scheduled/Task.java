@@ -5,10 +5,12 @@ import com.winkovo.pojo.Param.DaysReq;
 import com.winkovo.pojo.Param.WeatherReq;
 import com.winkovo.pojo.Param.WxReq;
 import com.winkovo.utils.MessageUtils;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
@@ -19,7 +21,7 @@ public class Task {
     @Resource
     private AppConfigure appConfigure;
     // 定时任务
-    @Scheduled(cron = "0 0 7 * * *")
+    @Scheduled(cron = "${task.corntab}")
     public void goodMorning() {
         log.info("开始自动发送早安微信");
         try {

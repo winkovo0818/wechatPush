@@ -25,6 +25,7 @@ public enum WeatherIcon {
     DUST("浮尘", "🌪"),
     SAND("沙尘", "🌪"),
     WIND("大风", "🌪"),
+    CLEAR_DAY("晴（白天）", "☀"),
     ;
     private String Desc;
     private String Icon;

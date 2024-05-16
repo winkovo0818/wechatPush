@@ -24,4 +24,6 @@ public class AppConfigure {
     private String birthday;
     @Value("${days.loveDate}")
     private String anniversary;
+    @Value("${task.corntab}")
+    private String corntab;
 }

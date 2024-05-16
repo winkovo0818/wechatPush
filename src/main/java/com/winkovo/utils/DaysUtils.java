@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,26 +29,13 @@ public class DaysUtils {
     }
 
     /**
-     * 计算两个时间差
-     */
-    public static long getDatePoor(Date endDate, Date nowDate) {
-        long nd = 1000 * 24 * 60 * 60;
-        long diff = endDate.getTime() - nowDate.getTime();
-        return diff / nd;
-    }
-
-    /**
      * 计算距离纪念日的天数
      */
     public static long calculationLianAi(String date) {
-        SimpleDateFormat simpleDateFormat = get();
-        Date startDate = new Date();
-        try {
-            startDate = simpleDateFormat.parse(date);
-        } catch (ParseException e) {
-          log.error("日期转换异常",e);
-        }
-        return getDatePoor(new Date(), startDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.parse(date, formatter);
+        LocalDate now = LocalDate.now();
+        return Math.abs(ChronoUnit.DAYS.between(startDate, now));
     }
 
     /**
