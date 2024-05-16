@@ -38,3 +38,16 @@ https://work.weixin.qq.com/wework_admin/frame#/profile
 项目简单 只是为了简单实现功能 欢迎二次开发
 本项目为个人开发项目 仅供学习使用 请勿用于商业用途
 云淡风轻 Blog:http://blog.winkovo.top
+
+
+### v2更新日志
+1.修改了每日一句的接口<br>
+2.引入hutools工具类实现Http请求<br>
+3.修改application.properties配置文件 新增corn表达式配置<br>
+
+
+### v3计划更新
+1.新增Nacos配置中心 实现配置文件的动态刷新<br>
+2.新增邮件报警功能 实现异常报警<br>
+3.实现多个企业微信的发送 手动创建定时任务(自定义配置)<br>
+
